@@ -1,0 +1,88 @@
+src/kj/parse/capnp_test-common-test.o: src/kj/parse/common-test.c++ \
+ /usr/include/stdc-predef.h src/kj/parse/common.h \
+ src/kj/parse/../common.h \
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h \
+ /usr/include/c++/9/initializer_list \
+ /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
+ /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
+ /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+ /usr/include/x86_64-linux-gnu/bits/long-double.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+ /usr/include/x86_64-linux-gnu/c++/9/bits/cpu_defines.h \
+ src/kj/parse/../memory.h src/kj/parse/../array.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/strings.h \
+ /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ src/kj/parse/../tuple.h src/kj/parse/../vector.h \
+ src/kj/parse/../string.h src/kj/compat/gtest.h src/kj/compat/../test.h \
+ src/kj/compat/../debug.h src/kj/compat/../exception.h \
+ src/kj/compat/../windows-sanity.h src/kj/compat/../function.h
+
+/usr/include/stdc-predef.h:
+
+src/kj/parse/common.h:
+
+src/kj/parse/../common.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h:
+
+/usr/include/c++/9/initializer_list:
+
+/usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h:
+
+/usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h:
+
+/usr/include/features.h:
+
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/x86_64-linux-gnu/bits/long-double.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/x86_64-linux-gnu/c++/9/bits/cpu_defines.h:
+
+src/kj/parse/../memory.h:
+
+src/kj/parse/../array.h:
+
+/usr/include/string.h:
+
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+/usr/include/strings.h:
+
+/usr/include/x86_64-linux-gnu/bits/strings_fortified.h:
+
+/usr/include/x86_64-linux-gnu/bits/string_fortified.h:
+
+src/kj/parse/../tuple.h:
+
+src/kj/parse/../vector.h:
+
+src/kj/parse/../string.h:
+
+src/kj/compat/gtest.h:
+
+src/kj/compat/../test.h:
+
+src/kj/compat/../debug.h:
+
+src/kj/compat/../exception.h:
+
+src/kj/compat/../windows-sanity.h:
+
+src/kj/compat/../function.h:
