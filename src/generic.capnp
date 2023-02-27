@@ -2,22 +2,7 @@
 
 using Schema = import "/capnp/schema.capnp";
 
-
-struct Struct {
-	userSchema @0 :Schema.Node;
-}
-
-
-interface GenericInterface{
-    interface InterfaceLoader
-    {   
-        load @0 (struct :Struct) -> ();
-    }
-    
-    interface ClientInterface
-    {
-        call @0 (value :AnyStruct) -> (echo :AnyStruct);
-    }
-
-    registerInterface @0 (client :ClientInterface) -> (loader :InterfaceLoader);
+interface InterfaceLoader
+{   
+    load @0 (schema :Schema.Node) -> (value :AnyStruct);
 }

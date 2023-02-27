@@ -8,16 +8,6 @@
 #include "generic.capnp.h"
 #include "client_interface.capnp.h"
 
-class ClientImpl final : public GenericInterface::ClientInterface::Server
-{
-public:
-    kj::Promise<void> call(CallContext context) override
-    {
-        std::cout << "call\n";
-        return kj::READY_NOW;
-    }
-};
-
 int main(int argc, const char *argv[])
 {
     // We expect one argument specifying the server address.
@@ -36,20 +26,17 @@ int main(int argc, const char *argv[])
     auto connection = networkAddress->connect().wait(waitScope);
 
     auto &&client = capnp::TwoPartyClient{*connection};
-    auto cap = client.bootstrap().castAs<GenericInterface>();
+    auto cap = client.bootstrap().castAs<InterfaceLoader>();
 
-    auto request = cap.registerInterfaceRequest();
-    request.setClient(kj::heap<ClientImpl>());
-    auto result = request.send().wait(waitScope);
-    auto loader = result.getLoader();
-
-    auto load_request = loader.loadRequest();
-    auto struct_ = load_request.initStruct();
-    struct_.setUserSchema(capnp::Schema::from<Message>().getProto());
-    auto promise = load_request.send();
+    auto request = cap.loadRequest();
+    request.setSchema(capnp::Schema::from<Message>().getProto());
+    auto promise = request.send();
 
     // // Wait for the result.  This is the only line that blocks.
     auto response = promise.wait(waitScope);
+
+    auto msg = response.getValue().as<Message>();
+    std::cout << msg.getText().cStr() << std::endl;
 
     while (true)
     {
