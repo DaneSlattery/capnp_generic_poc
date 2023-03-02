@@ -680,7 +680,7 @@ namespace capnp
       {
         auto structType = type.asStruct();
         auto structValue = value.as<DynamicStruct>();
-        KJ_REQUIRE(structValue.getSchema().getProto().getId() == structType.getProto().getId(), "Value type mismatch.")
+        KJ_REQUIRE(structValue.getSchema() == structType, "Value type mismatch.")
         {
           return;
         }

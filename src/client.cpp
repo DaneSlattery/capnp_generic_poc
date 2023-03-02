@@ -2,6 +2,8 @@
 #include <capnp/rpc-twoparty.h>
 #include <capnp/ez-rpc.h>
 #include <capnp/schema.h>
+#include <capnp/schema-loader.h>
+
 #include <iostream>
 #include <kj/async-io.h>
 
@@ -28,8 +30,22 @@ int main(int argc, const char *argv[])
     auto &&client = capnp::TwoPartyClient{*connection};
     auto cap = client.bootstrap().castAs<InterfaceLoader>();
 
+    capnp::MallocMessageBuilder mb;
+    auto message = mb.getRoot<UserSchema>();
+    message.setTypeId(capnp::typeId<Message>());
+    capnp::SchemaLoader loader;
+
+    loader.loadCompiledTypeAndDependencies<Message>();
+
+    auto schemas = loader.getAllLoaded();
+    auto listBuilder = message.initSchemas(schemas.size());
+    for (auto i : kj::indices(schemas))
+    {
+        listBuilder.setWithCaveats(i, schemas[i].getProto());
+    }
+
     auto request = cap.loadRequest();
-    request.setSchema(capnp::Schema::from<Message>().getProto());
+    request.setSchema(message.asReader());
     auto promise = request.send();
 
     // // Wait for the result.  This is the only line that blocks.
@@ -37,6 +53,7 @@ int main(int argc, const char *argv[])
 
     auto msg = response.getValue().as<Message>();
     std::cout << msg.getText().cStr() << std::endl;
+    std::cout << msg.getTimestamp().getNanoseconds() << std::endl;
 
     while (true)
     {

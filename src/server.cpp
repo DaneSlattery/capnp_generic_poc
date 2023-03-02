@@ -17,16 +17,26 @@ public:
     {
         std::cout << "load context\n";
         auto message = context.getParams();
-        auto schema_ = message.getSchema();
+        auto user_schema = message.getSchema();
+
         auto schema_loader = capnp::SchemaLoader();
-        auto loaded_schema = schema_loader.load(schema_);
+
+        for (auto schema : user_schema.getSchemas())
+        {
+            schema_loader.load(schema);
+        }
+
+        capnp::StructSchema schema = schema_loader.get(user_schema.getTypeId()).asStruct();
+        // auto loaded_schema = schema_loader.load(schema_);
 
         // how to do below without malloc?
 
         // cannot init result as a DynamicStruct
         auto mb = capnp::MallocMessageBuilder();
-        auto msg = mb.initRoot<capnp::DynamicStruct>(loaded_schema.asStruct());
+        auto msg = mb.initRoot<capnp::DynamicStruct>(schema);
         msg.set("text", "abc");
+        auto timestamp = msg.init("timestamp").as<capnp::DynamicStruct>();
+        timestamp.set("nanoseconds", 123);
 
         auto results = context.initResults();
         results.setValue(msg.asReader());
