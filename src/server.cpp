@@ -27,19 +27,13 @@ public:
         }
 
         capnp::StructSchema schema = schema_loader.get(user_schema.getTypeId()).asStruct();
-        // auto loaded_schema = schema_loader.load(schema_);
-
-        // how to do below without malloc?
-
-        // cannot init result as a DynamicStruct
-        auto mb = capnp::MallocMessageBuilder();
-        auto msg = mb.initRoot<capnp::DynamicStruct>(schema);
-        msg.set("text", "abc");
-        auto timestamp = msg.init("timestamp").as<capnp::DynamicStruct>();
-        timestamp.set("nanoseconds", 123);
 
         auto results = context.initResults();
-        results.setValue(msg.asReader());
+        auto value = results.getValue().getAs<capnp::DynamicStruct>(schema);
+
+        value.set("text", "abc");
+        auto timestamp = value.init("timestamp").as<capnp::DynamicStruct>();
+        timestamp.set("nanoseconds", 123);
 
         return kj::READY_NOW;
     }

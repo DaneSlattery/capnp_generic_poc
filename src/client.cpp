@@ -51,7 +51,7 @@ int main(int argc, const char *argv[])
     // // Wait for the result.  This is the only line that blocks.
     auto response = promise.wait(waitScope);
 
-    auto msg = response.getValue().as<Message>();
+    auto msg = response.getValue().getAs<Message>();
     std::cout << msg.getText().cStr() << std::endl;
     std::cout << msg.getTimestamp().getNanoseconds() << std::endl;
 
