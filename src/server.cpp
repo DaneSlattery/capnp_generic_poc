@@ -17,7 +17,7 @@ public:
     {
         std::cout << "load context\n";
         auto message = context.getParams();
-        auto user_schema = message.getSchema();
+        auto user_schema = message.getClientSchema();
 
         auto schema_loader = capnp::SchemaLoader();
 

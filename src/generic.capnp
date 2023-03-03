@@ -9,5 +9,5 @@ struct UserSchema{
 
 interface InterfaceLoader
 {   
-    load @0 (schema :UserSchema) -> (value :AnyPointer);
+    load @0 (clientSchema :UserSchema) -> (value :AnyPointer);
 }

@@ -1,0 +1,4 @@
+[submodule "pycapnp"]
+	path = pycapnp
+	url = https://github.com/Zentren/pycapnp.git
+	branch = dynamic_schema_loading

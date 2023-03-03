@@ -45,7 +45,7 @@ int main(int argc, const char *argv[])
     }
 
     auto request = cap.loadRequest();
-    request.setSchema(message.asReader());
+    request.setClientSchema(message.asReader());
     auto promise = request.send();
 
     // // Wait for the result.  This is the only line that blocks.
@@ -55,8 +55,8 @@ int main(int argc, const char *argv[])
     std::cout << msg.getText().cStr() << std::endl;
     std::cout << msg.getTimestamp().getNanoseconds() << std::endl;
 
-    while (true)
-    {
-        //
-    }
+    // while (true)
+    // {
+    //     //
+    // }
 }
