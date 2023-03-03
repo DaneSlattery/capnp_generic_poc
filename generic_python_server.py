@@ -70,17 +70,20 @@ class Server:
 
 class LoaderImpl(generic_capnp.InterfaceLoader.Server):
     def load_context(self, _context, **kwargs):
-        print("load schema")
-        # print(_context.release_params())
         client_schema = _context.params.clientSchema
 
         schema_loader = capnp.SchemaLoader()
-        print(client_schema.typeId)
         for schema in client_schema.schemas:
             schema_loader.load_dynamic(schema)
-            # print(schema.id)
-        # print(type(userSchema))
-        # print(userSchema.__dir__())
+
+        root_schema = schema_loader.get(client_schema.typeId)
+
+        results = _context.results
+
+        value = results.value.as_struct(root_schema.as_struct())
+
+        value.text = "TEXT!"
+        value.timestamp.nanoseconds = 15
 
 
 async def new_connection(reader, writer):
